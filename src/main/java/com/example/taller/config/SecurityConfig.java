@@ -35,7 +35,6 @@ public class SecurityConfig {
                         .requestMatchers("/", "/index").permitAll()
                         .requestMatchers("/login", "/register").anonymous()
                         .requestMatchers("/home").authenticated()
-                        // Proteger todas las rutas de citas - requiere autenticación
                         .requestMatchers("/citas/**").authenticated()
                         .anyRequest().authenticated()
                 );
