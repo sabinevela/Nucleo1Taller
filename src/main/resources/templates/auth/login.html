@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>San Rafael - Iniciar Sesión</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f3f0 0%, #e8e4df 25%, #ddd8d1 50%, #d2ccc3 75%, #c7c0b5 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #212529;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .main-container {
+            position: relative;
+            z-index: 10;
+        }
+
+        .login-card {
+            max-width: 480px;
+            border-radius: 25px;
+            border: none;
+            background: #ffffff;
+            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.2);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #2563eb, #1d4ed8, #1e40af);
+            z-index: 1;
+        }
+
+        .card-body {
+            padding: 2.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .welcome-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            padding: 2rem 1rem;
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            border-radius: 20px;
+        }
+
+        .vet-mascot {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            animation: bounce 2s infinite;
+            position: relative;
+        }
+
+        .vet-mascot::after {
+            content: '';
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border: 3px solid #3b82f6;
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: ping 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes ping {
+            0% { transform: scale(1); opacity: 0.3; }
+            100% { transform: scale(1.2); opacity: 0; }
+        }
+
+        .form-control {
+            border-radius: 15px;
+            border: 2px solid #e5e7eb;
+            padding: 15px 20px 15px 50px;
+            transition: all 0.3s ease;
+            background: #fafafa;
+            margin-top: 8px;
+        }
+
+        .form-control:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 0.25rem rgba(37, 99, 235, 0.15);
+            background: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+            z-index: 3;
+            font-size: 1.2rem;
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            border: none;
+            border-radius: 15px;
+            padding: 15px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .btn-login:hover {
+            background: linear-gradient(135deg, #1d4ed8, #1e40af);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        .card-title {
+            color: #1e40af;
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .form-label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .brand-name {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1e40af;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .alert {
+            border-radius: 15px;
+            border: none;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .alert-danger {
+            background: linear-gradient(135deg, #fee2e2, #fca5a5);
+            color: #991b1b;
+        }
+
+        .alert-info {
+            background: linear-gradient(135deg, #dbeafe, #93c5fd);
+            color: #1e40af;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
+        }
+
+        .divider span {
+            padding: 0 1rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .register-link {
+            color: #2563eb;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .register-link:hover {
+            color: #1d4ed8;
+            text-decoration: underline;
+        }
+
+        .quick-access {
+            background: #f8fafc;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            border: 2px dashed #e2e8f0;
+        }
+
+        .quick-access h6 {
+            color: #1e40af;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .service-highlight {
+            background: linear-gradient(135deg, #fef3c7, #fcd34d);
+            border-radius: 15px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            text-align: center;
+            border: 2px solid #f59e0b;
+        }
+
+        .service-highlight p {
+            margin: 0;
+            font-weight: 600;
+            color: #92400e;
+        }
+    </style>
+</head>
+<body>
+<div class="container d-flex justify-content-center align-items-center min-vh-100 main-container">
+    <div class="card login-card">
+        <div class="card-body">
+            <div class="welcome-header">
+                <div class="vet-mascot">
+                    <span style="font-size: 2.5rem; color: white;">🐾</span>
+                </div>
+                <div class="brand-name">Veterinaria San Rafael</div>
+                <p class="text-muted mb-0">Bienvenido de vuelta</p>
+            </div>
+
+            <h4 class="card-title">Iniciar Sesión</h4>
+
+            <div class="quick-access">
+                <h6>🕒 Acceso Rápido a:</h6>
+                <div class="row text-center">
+                    <div class="col-4">
+                        <small class="text-muted">📋<br>Historial</small>
+                    </div>
+                    <div class="col-4">
+                        <small class="text-muted">📅<br>Citas</small>
+                    </div>
+                    <div class="col-4">
+                        <small class="text-muted">💊<br>Medicinas</small>
+                    </div>
+                </div>
+            </div>
+
+            <form th:action="@{/login}" method="post">
+                <div class="mb-3 position-relative">
+                    <label for="username" class="form-label">Nombre de usuario</label>
+
+                    <input type="text" class="form-control ps-5" id="username" name="username" placeholder="Ingrese su usuario">
+                </div>
+
+                <div class="mb-3 position-relative">
+                    <label for="password" class="form-label">Contraseña</label>
+
+                    <input type="password" class="form-control ps-5" id="password" name="password" placeholder="Contraseña">
+                </div>
+
+                <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                    ❌ <strong>Error de acceso</strong> - Usuario y/o contraseña incorrecta
+                </div>
+                <div th:if="${param.logout}" class="alert alert-info" role="alert">
+                    ✅ <strong>Sesión cerrada</strong> - Cerraste sesión correctamente
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-login">Iniciar Sesion</button>
+                </div>
+            </form>
+
+            <div class="divider">
+                <span>o</span>
+            </div>
+
+            <div class="text-center mb-3">
+                ¿No tienes cuenta?<br>
+                <a th:href="@{/register}" class="register-link">🆕 Regístrate aquí</a>
+            </div>
+
+            <div class="service-highlight">
+                <p>🚨 <strong>Emergencias 24/7</strong> - Atención inmediata</p>
+            </div>
+
+            <div class="text-center mt-4 p-3" style="background: #f1f5f9; border-radius: 15px;">
+                <small class="text-muted">
+                    🔒 Conexión segura - Tus datos están protegidos<br>
+                    📞 Ayuda: 0987654321
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

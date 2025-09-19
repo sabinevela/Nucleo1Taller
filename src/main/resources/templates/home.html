@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Centro Veterinario San Rafael</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #f5f3f0 0%, #e8e4df 25%, #ddd8d1 50%, #d2ccc3 75%, #c7c0b5 100%);
+        }
+        .hero-bg {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 50%, #1e40af 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 150, 167, 0.4);
+        }
+        .floating-animation {
+            animation: floating 4s ease-in-out infinite;
+        }
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(1deg); }
+            50% { transform: translateY(-15px) rotate(0deg); }
+            75% { transform: translateY(-8px) rotate(-1deg); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .glass-effect {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .service-icon {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+        }
+        .wave-divider {
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' opacity='.25' fill='%23ffffff'%3E%3C/path%3E%3Cpath d='M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z' opacity='.5' fill='%23ffffff'%3E%3C/path%3E%3Cpath d='M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z' fill='%23ffffff'%3E%3C/path%3E%3C/svg%3E") no-repeat center center;
+            background-size: cover;
+            height: 80px;
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+
+<nav class="glass-effect sticky top-0 z-50 shadow-lg">
+    <div class="container mx-auto px-4">
+        <div class="flex items-center justify-between py-4">
+            <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center floating-animation">
+                    <span class="text-white text-xl font-bold">🐾</span>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-blue-800">Centro Veterinario</h1>
+                    <p class="text-sm text-blue-600 font-semibold">San Rafael</p>
+                </div>
+            </div>
+            <div class="hidden md:flex items-center space-x-4">
+                <span class="text-blue-700 font-medium flex items-center">
+                    <span class="text-xl mr-2">📞</span> 0987654321
+                </span>
+                <span class="text-blue-700 font-medium flex items-center">
+                    <span class="text-xl mr-2">⏰</span> Atención 24/7
+                </span>
+                <div class="px-4 py-2 bg-red-500 text-white font-bold rounded-full pulse-animation">
+                    <span class="text-sm">🚨 EMERGENCIAS</span>
+                </div>
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded shadow transition transform hover:-translate-y-1 hover:shadow-lg">
+                        Cerrar Sesión
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</nav>
+
+<section class="hero-bg text-white py-20 relative overflow-hidden">
+    <div class="absolute inset-0 bg-black opacity-20"></div>
+    <div class="container mx-auto px-4 text-center relative z-10">
+        <div class="floating-animation mb-8">
+            <img src="https://cdn-icons-png.flaticon.com/512/2138/2138440.png" alt="Veterinario" class="w-32 h-32 mx-auto opacity-90">
+        </div>
+        <h1 class="text-6xl font-extrabold mb-6 leading-tight">
+            Bienvenidos a <span class="text-yellow-200">San Rafael</span>
+        </h1>
+        <p class="text-2xl mb-8 max-w-3xl mx-auto text-blue-100">
+            Atención veterinaria 24/7 con amor, cuidado profesional y tecnología de punta
+        </p>
+        <div class="flex justify-center space-x-4">
+            <a th:href="@{/citas/agendar}"
+               class="bg-yellow-400 hover:bg-yellow-300 text-blue-900 font-bold py-4 px-8 rounded-full shadow-lg transform hover:scale-105 transition duration-300">
+                Agendar Cita 📅
+            </a>
+        </div>
+
+    </div>
+    <div class="wave-divider absolute bottom-0 left-0 w-full"></div>
+</section>
+
+<!-- Services Section -->
+<section class="py-20">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-5xl font-bold text-gray-800 mb-6">Nuestros Servicios</h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                Ofrecemos atención integral para todas las necesidades de salud de tus mascotas
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white rounded-3xl shadow-2xl p-8 card-hover">
+                <div class="service-icon w-20 h-20 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2138/2138558.png" alt="Consultas" class="w-10 h-10">
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Consultas Generales</h3>
+                <p class="text-gray-600 text-center leading-relaxed">
+                    Revisiones completas de salud, diagnóstico y seguimiento personalizado para tus mascotas con los mejores especialistas.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-2xl p-8 card-hover">
+                <div class="service-icon w-20 h-20 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2138/2138522.png" alt="Emergencias" class="w-10 h-10">
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Emergencias 24/7</h3>
+                <p class="text-gray-600 text-center leading-relaxed">
+                    Atención inmediata y profesional en situaciones críticas y urgentes. Siempre listos cuando más nos necesitas.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-2xl p-8 card-hover">
+                <div class="service-icon w-20 h-20 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2138/2138489.png" alt="Vacunación" class="w-10 h-10">
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Vacunación</h3>
+                <p class="text-gray-600 text-center leading-relaxed">
+                    Protección contra enfermedades mediante campañas de vacunación y control sanitario preventivo.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-2xl p-8 card-hover">
+                <div class="service-icon w-20 h-20 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2138/2138594.png" alt="Cirugías" class="w-10 h-10">
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Cirugías</h3>
+                <p class="text-gray-600 text-center leading-relaxed">
+                    Intervenciones quirúrgicas seguras con anestesia controlada, tecnología avanzada y recuperación guiada.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-2xl p-8 card-hover">
+                <div class="service-icon w-20 h-20 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2138/2138537.png" alt="Laboratorio" class="w-10 h-10">
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Laboratorio</h3>
+                <p class="text-gray-600 text-center leading-relaxed">
+                    Pruebas de laboratorio, radiografías y ecografías para diagnósticos precisos y confiables.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-2xl p-8 card-hover">
+                <div class="service-icon w-20 h-20 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2138/2138507.png" alt="Peluquería" class="w-10 h-10">
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Peluquería</h3>
+                <p class="text-gray-600 text-center leading-relaxed">
+                    Cuidado estético y sanitario profesional para mantener a tus mascotas saludables y felices.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team Section -->
+<section class="py-20 bg-white/60">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-5xl font-bold text-gray-800 mb-6">Nuestro Equipo Profesional</h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                Veterinarios especializados comprometidos con el bienestar de tus mascotas
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-4 gap-8">
+            <div class="bg-white rounded-3xl shadow-xl p-8 text-center card-hover">
+                <div class="w-24 h-24 mx-auto mb-6 rounded-full overflow-hidden bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
+                    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Dr. Juan Pérez" class="w-16 h-16 opacity-80">
+                </div>
+                <h4 class="text-xl font-bold text-gray-800 mb-2">Dr. Juan Pérez</h4>
+                <p class="text-blue-600 font-semibold mb-3">Veterinario General</p>
+                <p class="text-gray-600 text-sm">15+ años de experiencia en medicina veterinaria general</p>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-xl p-8 text-center card-hover">
+                <div class="w-24 h-24 mx-auto mb-6 rounded-full overflow-hidden bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
+                    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Dra. Ana Gómez" class="w-16 h-16 opacity-80">
+                </div>
+                <h4 class="text-xl font-bold text-gray-800 mb-2">Dra. Ana Gómez</h4>
+                <p class="text-blue-600 font-semibold mb-3">Especialista en Emergencias</p>
+                <p class="text-gray-600 text-sm">Experta en cuidados intensivos y emergencias veterinarias</p>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-xl p-8 text-center card-hover">
+                <div class="w-24 h-24 mx-auto mb-6 rounded-full overflow-hidden bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
+                    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Dra. Luisa Fernández" class="w-16 h-16 opacity-80">
+                </div>
+                <h4 class="text-xl font-bold text-gray-800 mb-2">Dra. Luisa Fernández</h4>
+                <p class="text-blue-600 font-semibold mb-3">Cirujana Veterinaria</p>
+                <p class="text-gray-600 text-sm">Especializada en cirugías complejas y procedimientos avanzados</p>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-xl p-8 text-center card-hover">
+                <div class="w-24 h-24 mx-auto mb-6 rounded-full overflow-hidden bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
+                    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Dr. Carlos Ruiz" class="w-16 h-16 opacity-80">
+                </div>
+                <h4 class="text-xl font-bold text-gray-800 mb-2">Dr. Carlos Ruiz</h4>
+                <p class="text-blue-600 font-semibold mb-3">Laboratorio y Diagnóstico</p>
+                <p class="text-gray-600 text-sm">Especialista en diagnóstico por imágenes y análisis clínicos</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Facilities Section -->
+<section class="py-20">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-5xl font-bold text-gray-800 mb-6">Nuestras Instalaciones</h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                Espacios modernos y equipados con la mejor tecnología para el cuidado de tu mascota
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="relative card-hover">
+                <img src="https://lamarinaalta.com/wp-content/uploads/2023/06/sala-de-consulta-de-clinica-veterinaria-denia.jpeg"
+                     class="w-full h-80 object-cover rounded-3xl shadow-2xl" alt="Sala de Consultas">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-3xl flex items-end p-6">
+                    <h3 class="text-white text-2xl font-bold">Sala de Consultas</h3>
+                </div>
+            </div>
+
+            <div class="relative card-hover">
+                <img src="https://www.shutterstock.com/image-photo/focused-young-veterinarian-elderly-female-260nw-2397126353.jpg"
+                     class="w-full h-80 object-cover rounded-3xl shadow-2xl" alt="Quirófano">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-3xl flex items-end p-6">
+                    <h3 class="text-white text-2xl font-bold">Quirófano</h3>
+                </div>
+            </div>
+
+            <div class="relative card-hover">
+                <img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?fit=crop&w=600&q=80"
+                     class="w-full h-80 object-cover rounded-3xl shadow-2xl" alt="Área de Emergencias">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-3xl flex items-end p-6">
+                    <h3 class="text-white text-2xl font-bold">Área de Emergencias</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+</body>
+</html>
