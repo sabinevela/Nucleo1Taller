@@ -17,10 +17,10 @@ public class UserService {
 
     public User save(User user){
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-        Role userRole = roleRepository.findByName("ROLE_ADMIN")
+        Role userRole = roleRepository.findByName("ROLE_USER")
                 .orElseGet(() -> {
                     Role newRole = new Role();
-                    newRole.setName("ROLE_ADMIN");
+                    newRole.setName("ROLE_USER");
                     return roleRepository.save(newRole);
                 });
         user.getRoles().add(userRole);

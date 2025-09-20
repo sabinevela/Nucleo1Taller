@@ -19,7 +19,6 @@ public class Cita {
     private LocalTime hora;
     private String motivo;
 
-    // Getters y Setters
     public Long getId() {
         return id;
     }
